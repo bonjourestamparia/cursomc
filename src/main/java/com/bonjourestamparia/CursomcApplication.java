@@ -30,9 +30,13 @@ import com.bonjourestamparia.repositories.ItemPedidoRepository;
 import com.bonjourestamparia.repositories.PagamentoRepository;
 import com.bonjourestamparia.repositories.PedidoRepository;
 import com.bonjourestamparia.repositories.ProdutoRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner{
+	@Autowired
+    private ObjectMapper objectMapper;
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -84,6 +88,11 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		
+		Faker faker = new Faker();
+		for(int x = 0; x < 50; x++) {
+			categoriaRepository.save(new Categoria(faker.team().name()));
+		}
 
 		// Estados e cidades		
 		Estado est1 = new Estado("Minas Gerais");
