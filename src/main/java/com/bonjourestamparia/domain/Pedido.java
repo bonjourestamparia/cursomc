@@ -64,6 +64,13 @@ public class Pedido implements Serializable {
 		super();
 		this.id = id;
 	}
+	
+	public double getValorTotal() {
+		if(itens == null || itens.isEmpty())
+			return 0;
+		
+		return itens.stream().mapToDouble(ItemPedido::getSubTotal).sum();
+	}
 
 	public Integer getId() {
 		return id;
