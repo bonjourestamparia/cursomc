@@ -1,0 +1,13 @@
+{
+    "nome": "Rodrigo Bonjour",
+    "email": "rbonjour@gmail.com",
+    "cpfOuCnpj": "81646208072",
+    "tipo": 1,
+    "logradouro": "Rua tal",
+    "numero": 449,
+    "complemento": "ap 502",
+    "cep": "90010-350",
+    "telefone1": "51 - 992323214",
+    "telefone2": "5511",
+    "telefone3": "99999"
+}
