@@ -1,8 +1,11 @@
 package com.bonjourestamparia.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -145,4 +148,29 @@ public class Pedido implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pedido número: ")
+		.append(getId())
+		.append(", Instante: ")
+		.append(sdf.format(getInstante()))
+		.append(", Cliente: ")
+		.append(getCliente().getNome())
+		.append(", Situação do Pagamento: ")
+		.append(getPagamento().getEstado().getDescricao())
+		.append("\n Detalhes:\n");
+		
+		getItens().forEach(itemPedido -> builder.append(itemPedido.toString()));
+		
+		builder.append("Valor total: ")
+		.append(nf.format(getValorTotal()));
+
+		return builder.toString();
+	}
+
+	
 }
