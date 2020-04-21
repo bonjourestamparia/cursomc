@@ -20,6 +20,7 @@ import com.bonjourestamparia.domain.PagamentoComCartao;
 import com.bonjourestamparia.domain.Pedido;
 import com.bonjourestamparia.domain.Produto;
 import com.bonjourestamparia.domain.enums.EstadoPagamento;
+import com.bonjourestamparia.domain.enums.Perfil;
 import com.bonjourestamparia.domain.enums.TipoCliente;
 import com.bonjourestamparia.repositories.CategoriaRepository;
 import com.bonjourestamparia.repositories.CidadeRepository;
@@ -136,13 +137,20 @@ public class DBService {
 		Cliente cli1 = new Cliente(null, "Maria Silva", "rbonjour@gmail.com", "123456", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("992323214", "96223232"));
 		
+		Cliente cli2 = new Cliente(null, "Ana Costa", "rodrigo@bonjourestamparia.com.br", "81646208072", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123"));
+		cli2.addPerfil(Perfil.ADMIN);
+		cli2.getTelefones().addAll(Arrays.asList("992323214", "96223232"));
+
+		
 		Endereco e1 = new Endereco(null, "Rua Flores", "33", "Apt 202", "90010-350", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua Vigário", "625", "Sala 2", "90010-350", cli1, c2);
+		Endereco e3 = new Endereco(null, "Rua Vigário", "625", "Sala 2", "90010-350", cli1, c3);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 		
-		clienteRepository.save(cli1);
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 		
 		// Pedidos e pagamento
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
